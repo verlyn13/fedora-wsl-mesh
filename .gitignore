@@ -1,0 +1,74 @@
+# WSL and system files
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs and diagnostics
+*.log
+*.pid
+*.seed
+*.pid.lock
+wsl_diag.json
+
+# Sensitive configuration
+*.key
+*.pem
+*.crt
+*.p12
+secrets/
+credentials/
+
+# Tailscale/WireGuard
+tailscale.state
+wg*.conf
+*.privatekey
+*.publickey
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+ENV/
+env/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ansible
+*.retry
+ansible/*.log
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+*.tmp
+*.bak
+*.backup
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# Network dumps
+*.pcap
+*.tcpdump
+
+# Local environment
+.env
+.env.local
+.env.*.local
+
+# Build artifacts
+build/
+dist/
+*.tar.gz
+*.zip
