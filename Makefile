@@ -225,3 +225,57 @@ validate: ## Validate configuration files
 		sudo wg show mesh &>/dev/null && echo "✓ WireGuard config valid" || echo "✗ WireGuard config invalid"; \
 	fi
 	@echo "$(GREEN)Validation complete$(NC)"
+
+# Phase 2.8: Mesh-Ops User Management
+
+mesh-user-create: ## Create mesh-ops user for WSL node
+	@echo "$(GREEN)Creating mesh-ops user...$(NC)"
+	@bash scripts/setup/create-mesh-ops-user.sh
+
+mesh-user-validate: ## Validate mesh-ops user setup
+	@echo "$(GREEN)Validating mesh-ops user...$(NC)"
+	@bash scripts/setup/validate-mesh-ops.sh
+
+mesh-user-switch: ## Switch to mesh-ops user
+	@echo "$(GREEN)Switching to mesh-ops user...$(NC)"
+	@sudo su - mesh-ops
+
+mesh-user-bootstrap: ## Bootstrap mesh-ops development environment
+	@echo "$(GREEN)Bootstrapping mesh-ops environment...$(NC)"
+	@if [ ! -f scripts/setup/install-mesh-ops-tools.sh ]; then \
+		echo "$(YELLOW)Bootstrap script not yet available$(NC)"; \
+		echo "Will be implemented in Phase 2.9"; \
+	else \
+		sudo su - mesh-ops -c "bash /home/verlyn13/Projects/verlyn13/fedora-wsl-mesh/scripts/setup/install-mesh-ops-tools.sh"; \
+	fi
+
+mesh-user-remove: ## Remove mesh-ops user (rollback)
+	@echo "$(YELLOW)WARNING: This will remove the mesh-ops user and all data$(NC)"
+	@read -p "Are you sure? (yes/no): " confirm; \
+	if [ "$$confirm" = "yes" ]; then \
+		echo "$(RED)Removing mesh-ops user...$(NC)"; \
+		sudo userdel -r mesh-ops 2>/dev/null || true; \
+		sudo rm -f /etc/sudoers.d/mesh-ops-wsl; \
+		echo "✓ mesh-ops user removed"; \
+	else \
+		echo "Cancelled"; \
+	fi
+
+mesh-user-status: ## Show mesh-ops user status
+	@echo "$(GREEN)Mesh-Ops User Status$(NC)"
+	@echo "===================="
+	@if id mesh-ops &>/dev/null; then \
+		echo "✓ User exists"; \
+		echo "  UID: $$(id -u mesh-ops)"; \
+		echo "  GID: $$(id -g mesh-ops)"; \
+		echo "  Home: /home/mesh-ops"; \
+		echo "  Shell: $$(getent passwd mesh-ops | cut -d: -f7)"; \
+		if sudo test -f /home/mesh-ops/.config/mesh-ops/config.yaml; then \
+			echo "  Config: ✓ Present"; \
+		else \
+			echo "  Config: ✗ Missing"; \
+		fi; \
+	else \
+		echo "✗ User does not exist"; \
+		echo "  Run 'make mesh-user-create' to create"; \
+	fi
