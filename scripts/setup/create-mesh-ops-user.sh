@@ -192,4 +192,4 @@ echo "1. Test access: sudo su - $MESH_USER"
 echo "2. Verify setup: ./scripts/setup/validate-mesh-ops.sh"
 echo "3. Install dev tools: ./scripts/setup/install-mesh-ops-tools.sh"
 echo
-echo "SSH access: ssh $MESH_USER@$(hostname) (once SSH keys are configured)"
+echo "SSH access: ssh $MESH_USER@\$(hostname) (once SSH keys are configured)"
