@@ -57,14 +57,15 @@ The Fedora WSL mesh node is fully operational with Phase 2.8 mesh-ops user imple
 
 | Peer | IP Address | Status | Latency | Role | Phase Status |
 |------|------------|--------|---------|------|--------------|
-| hetzner-hq | 100.84.151.58 | 🟢 Online | ~460ms | Control Node | Phase 2 Complete |
-| laptop-hq | 100.84.2.8 | 🟢 Online | ~217ms | Managed Node | Phase 2 Complete |
+| hetzner-hq | 100.84.151.58 | 🟢 Online | ~460ms | Production Hub | Phase 2.8 ✅ Complete |
+| laptop-hq | 100.84.2.8 | 🟢 Online | ~217ms | Development Node | Phase 2.8 ✅ Complete |
 
 ### Mesh Network Overview
-- **Total Nodes**: 3 (all connected)
-- **Control Node**: hetzner-hq (Ansible management)
-- **Managed Nodes**: laptop-hq (Phase 2 complete), wsl-fedora-kbc (Phase 1)
-- **Network Health**: Fully operational
+- **Total Nodes**: 3 (all connected, 100% Phase 2.8 deployment)
+- **Production Hub**: hetzner-hq (SSH port 2222, read-only system access for mesh-ops)
+- **All Nodes**: mesh-ops deployed (UID/GID 2000) with consistent configuration
+- **Network Health**: Fully operational with complete mesh-ops coverage
+- **Security**: Fixed dangerous wildcard sudo permissions across all nodes
 
 ## Service Status
 

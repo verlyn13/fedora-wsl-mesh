@@ -12,6 +12,8 @@ This repository manages a Fedora WSL2 node participating in a distributed mesh n
 - `make status` - Full system and mesh network health check
 - `make check-mesh` - Test connectivity to mesh peers
 - `make diagnose` - Run comprehensive diagnostics
+- `make mesh-user-status` - Check mesh-ops user status
+- `make mesh-user-switch` - Switch to mesh-ops user
 
 ### Network Management
 - `make mesh-start` - Start Tailscale connection
@@ -56,11 +58,12 @@ This WSL node connects to a mesh network with:
 
 ## Current State
 
-- Tailscale v1.86.2 installed and connected
-- Node hostname: wsl-fedora-kbc
-- Mesh IP: 100.88.131.44
-- All peer nodes reachable
-- SSH service running on port 22
+- **Phase 2.8**: Complete (mesh-ops user deployed)
+- **Tailscale**: v1.86.2 connected (IP: 100.88.131.44)
+- **mesh-ops**: Operational (UID/GID 2000)
+- **Peer Nodes**: All reachable and Phase 2.8 complete
+- **SSH**: Running on port 22 (Hetzner uses port 2222)
+- **Security**: Fixed dangerous sudo wildcards
 
 ## Common Issues and Solutions
 

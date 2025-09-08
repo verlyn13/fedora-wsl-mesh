@@ -4,6 +4,10 @@
 
 This repository manages the Fedora WSL2 instance participating in the distributed mesh network infrastructure. Running on Windows 11 within the University of Alaska network, this node provides a unique bridge between Windows/WSL environments and the broader mesh network.
 
+**Current Phase**: 2.8 COMPLETE ✅  
+**Deployment Status**: mesh-ops user operational (first node in rollout)  
+**Network Status**: Connected to mesh via Tailscale
+
 ## System Context
 
 - **Node Type**: WSL2 Fedora Instance
@@ -36,6 +40,21 @@ fedora-wsl-mesh/
 
 ```
 
+## Mesh Network Status
+
+### Connected Nodes
+| Node | IP Address | Status | Phase 2.8 |
+|------|------------|--------|----------|
+| **wsl-fedora-kbc** (this) | 100.88.131.44 | 🟢 Operational | ✅ Complete |
+| **laptop-hq** | 100.84.2.8 | 🟢 Operational | ✅ Complete |
+| **hetzner-hq** | 100.84.151.58 | 🟢 Operational | ✅ Complete |
+
+### mesh-ops User
+- **Status**: Deployed and operational
+- **UID/GID**: 2000/2000
+- **Access**: `sudo su - mesh-ops` or `ssh mesh-ops@wsl-fedora-kbc`
+- **Purpose**: Infrastructure operations and agent orchestration
+
 ## Quick Start
 
 ### Prerequisites
@@ -44,6 +63,19 @@ fedora-wsl-mesh/
 2. systemd enabled in WSL
 3. sudo access (wheel group)
 4. TUN/TAP device available
+
+### Phase 2.8 Management Commands
+
+```bash
+# Check mesh-ops status
+make mesh-user-status
+
+# Switch to mesh-ops user
+make mesh-user-switch
+
+# Validate setup
+make mesh-user-validate
+```
 
 ### Initial Setup
 
